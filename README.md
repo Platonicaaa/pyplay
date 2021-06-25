@@ -1,0 +1,2 @@
+# pyplay
+Django sandbox

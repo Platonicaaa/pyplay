@@ -11,13 +11,6 @@ import os
 import dotenv
 
 from django.core.wsgi import get_wsgi_application
-from encrypted_secrets import load_secrets, YAMLFormatException
-
-# Load encrypted secrets
-try:
-    load_secrets()
-except YAMLFormatException:
-    print("\n\n\nMALFORMED YAML IN ENCRYPTED SECRETS\n\n\n")
 
 # Load environment specific variables
 dotenv.load_dotenv(

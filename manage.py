@@ -2,13 +2,13 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+
 import dotenv
-from encrypted_secrets import load_secrets
 
 
 def main():
     """Run administrative tasks."""
-    load_secrets()
+    dotenv.load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pyplayy.settings.development')
 
     if os.getenv('DJANGO_SETTINGS_MODULE'):
@@ -26,7 +26,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-dotenv.load_dotenv(
-    os.path.join(os.path.dirname(__file__), '.env')
-)

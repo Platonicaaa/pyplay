@@ -17,9 +17,7 @@ Sandbox project for playing with the capabilities of Django Framework.
 
 
 # View/Edit application secrets
-  - You will need a `master.key` file in the root (`.`) of the project 
-  - This key is not public on GitHub (ask a colleague for it).
-  - See/edit secrets with `EDITOR=vi python3 manage.py edit_secrets`
+  - Ask one of the devs for the `.env` file
 
 
 # Test the application

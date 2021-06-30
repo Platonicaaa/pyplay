@@ -123,7 +123,3 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DJANGO_SECRETS_ROOT = 'pyplayy.settings'
-
-git filter-branch --force --index-filter \
-  "git rm --cached --ignore-unmatch mysite/settings.py" \
-  --prune-empty --tag-name-filter cat -- --all

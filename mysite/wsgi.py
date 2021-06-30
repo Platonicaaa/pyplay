@@ -10,6 +10,12 @@ https://docs.djangoproject.com/en/3.2/howto/deployment/wsgi/
 import os
 
 from django.core.wsgi import get_wsgi_application
+from encrypted_secrets import load_secrets, YAMLFormatException
+
+try:
+    load_secrets()
+except YAMLFormatException:
+    print("\n\n\nMALFORMED YAML IN ENCRYPTED SECRETS\n\n\n")
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mysite.settings')
 

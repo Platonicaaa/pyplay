@@ -129,3 +129,7 @@ dmypy.json
 .pyre/
 
 .idea
+
+# Secrets are published to Git, but in an encrypted format
+# To drecrypt those secrets, you need the master.key, thus we cannot make it public
+master.key

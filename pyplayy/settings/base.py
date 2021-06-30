@@ -10,8 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-import os
-import django_heroku
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -124,6 +122,8 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Activate Django-Heroku.
-django_heroku.settings(locals())
+DJANGO_SECRETS_ROOT = 'pyplayy.settings'
 
+git filter-branch --force --index-filter \
+  "git rm --cached --ignore-unmatch mysite/settings.py" \
+  --prune-empty --tag-name-filter cat -- --all

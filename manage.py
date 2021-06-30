@@ -2,13 +2,17 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+import dotenv
 from encrypted_secrets import load_secrets
 
 
 def main():
     """Run administrative tasks."""
     load_secrets()
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pyplayy.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pyplayy.settings.development')
+
+    if os.getenv('DJANGO_SETTINGS_MODULE'):
+        os.environ['DJANGO_SETTINGS_MODULE'] = os.getenv('DJANGO_SETTINGS_MODULE')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
@@ -22,3 +26,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+dotenv.load_dotenv(
+    os.path.join(os.path.dirname(__file__), '.env')
+)

@@ -20,3 +20,8 @@ Sandbox project for playing with the capabilities of Django Framework.
   - You will need a `master.key` file in the root (`.`) of the project 
   - This key is not public on GitHub (ask a colleague for it).
   - See/edit secrets with `EDITOR=vi python3 manage.py edit_secrets`
+
+
+# Test the application
+  - Collect static files: `python3 manage.py collectstatic`
+  - Run tests: `python3 manage.py test`

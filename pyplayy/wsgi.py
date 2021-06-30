@@ -1,5 +1,5 @@
 """
-WSGI config for mysite project.
+WSGI config for pyplayy project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -17,6 +17,6 @@ try:
 except YAMLFormatException:
     print("\n\n\nMALFORMED YAML IN ENCRYPTED SECRETS\n\n\n")
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mysite.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pyplayy.settings')
 
 application = get_wsgi_application()

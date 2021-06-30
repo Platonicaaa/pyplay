@@ -8,7 +8,7 @@ from encrypted_secrets import load_secrets
 def main():
     """Run administrative tasks."""
     load_secrets()
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mysite.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pyplayy.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

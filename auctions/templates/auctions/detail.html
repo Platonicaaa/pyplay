@@ -1,23 +1,31 @@
 {% extends 'base.html' %}
 
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{% url 'auctions:index' %}">Auctions</a></li>
+    <li class="breadcrumb-item active"><a href="{% url 'auctions:detail' pk=auction.pk %}">{{ auction.pk }}</a></li>
+{% endblock %}
+
 {% block content %}
 
     <legend><h1>{{ auction.product_id }}</h1></legend>
+    <br>
 
     <p>Starts at: <strong> {{ auction.time_starting }}</strong></p>
     <p>Ends at: <strong> {{ auction.time_ending }}</strong></p>
+    <br>
+    {% if error_message %}
+        <p><strong>{{ error_message }}</strong></p>
+    {% endif %}
+    <br>
 
     <form action="{% url 'auctions:bid' auction.id %}" method="post">
-        {% csrf_token %}
-        <fieldset>
+        <div class="form-group">
+            {% csrf_token %}
 
-            {% if error_message %}
-                <p><strong>{{ error_message }}</strong></p>
-            {% endif %}
             <label for="{{ auction.id }}-bids">Number of bids:</label>
             <input id="{{ auction.id }}-bids" type="number" disabled value="{{ auction.bids }}">
-            <input type="submit" value="Bid">
-        </fieldset>
+        </div>
+        <input class="btn btn-primary" type="submit" value="Bid">
     </form>
 
 {% endblock %}

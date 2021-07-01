@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{% url 'polls:index' %}">Latest Questions</a></li>
+    <li class="breadcrumb-item active"><a href="{% url 'polls:results' pk=question.pk %}">Results</a></li>
+{% endblock %}
+
 {% block content %}
     <h1>{{ question.question_text }}</h1>
 

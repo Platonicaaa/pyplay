@@ -136,3 +136,5 @@ master.key
 
 # These are generated
 staticfiles
+
+**/.DS_Store

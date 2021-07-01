@@ -38,6 +38,13 @@ class Auction(models.Model):
     time_starting = models.DateTimeField()
     time_ending = models.DateTimeField()
 
+    def is_active(self):
+        now = timezone.now()
+        return (self.time_starting <= now) and (self.time_ending >= now)
+
+    def status(self):
+        return 'Active' if self.is_active() else 'Expired'
+
 
 class Watchlist(models.Model):
     user_id = models.ForeignKey(PyPlayyUser, on_delete=models.CASCADE)

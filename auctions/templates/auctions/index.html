@@ -1,18 +1,31 @@
 {% extends 'base.html' %}
 
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{% url 'auctions:index' %}">Auctions</a></li>
+{% endblock %}
+
 {% block content %}
 
     <h1>Latest Auctions</h1>
-
+    <br>
     {% if auction_list %}
-        <ul>
+        <div class="list-group">
             {% for auction in auction_list %}
-                <li>
-                    <p>{{ auction.product_id.description }}</p>
-                    <a href="{% url 'auctions:detail' auction.id %}"> {{ auction.time_starting }}</a>
-                </li>
+                <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                   href="{% url 'auctions:detail' auction.id %}">
+                    {{ auction.product_id.description }}
+                    <span class="badge badge-pill
+                            {% if auction.is_active %}
+                                badge-success
+                            {% else %}
+                                badge-danger
+                            {% endif %}"
+                    >
+                    {{ auction.status }}
+                    </span>
+                </a>
             {% endfor %}
-        </ul>
+        </div>
     {% else %}
         <p>No auctions are available.</p>
     {% endif %}

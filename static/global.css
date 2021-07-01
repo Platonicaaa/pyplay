@@ -1,11 +1,25 @@
-li a {
-    color: green;
-}
-
 body {
-    background: white url("images/inuyasha-1.jpg") no-repeat center center fixed;
+    background: url('images/inuyasha.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+}
+
+.logo {
+    font-family: 'Peralta', cursive;
+}
+
+.logo a {
+    color: rgba(0, 0, 0, .9);
+}
+
+.logo a:hover,
+.logo a:active {
+    text-decoration: none;
+}
+
+.breadcrumb {
+    background-color: azure;
+    opacity: 65%;
 }

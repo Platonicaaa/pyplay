@@ -19,6 +19,11 @@ class Question(models.Model):
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_date <= now
 
+    def total_votes(self):
+        choices = self.choice_set.all()
+        votes_list = map(lambda choice: choice.votes, choices)
+        return sum(votes_list)
+
     def __str__(self):
         return self.question_text
 

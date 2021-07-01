@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>Latest Auctions</h1>
+
+    {% if auction_list %}
+        <ul>
+            {% for auction in auction_list %}
+                <li>
+                    <p>{{ auction.product_id.description }}</p>
+                    <a href="{% url 'auctions:detail' auction.id %}"> {{ auction.time_starting }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No auctions are available.</p>
+    {% endif %}
+
+{% endblock %}

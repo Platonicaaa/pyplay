@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <legend><h1>{{ auction.product_id }}</h1></legend>
+
+    <p>Starts at: <strong> {{ auction.time_starting }}</strong></p>
+    <p>Ends at: <strong> {{ auction.time_ending }}</strong></p>
+
+    <form action="{% url 'auctions:bid' auction.id %}" method="post">
+        {% csrf_token %}
+        <fieldset>
+
+            {% if error_message %}
+                <p><strong>{{ error_message }}</strong></p>
+            {% endif %}
+            <label for="{{ auction.id }}-bids">Number of bids:</label>
+            <input id="{{ auction.id }}-bids" type="number" disabled value="{{ auction.bids }}">
+            <input type="submit" value="Bid">
+        </fieldset>
+    </form>
+
+{% endblock %}

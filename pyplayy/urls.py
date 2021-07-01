@@ -19,9 +19,10 @@ from django.urls import path, include
 from django.views.generic import RedirectView
 
 urlpatterns = [
-    path('', RedirectView.as_view(url='polls/')),
+    path('', RedirectView.as_view(url='auctions/')),
     path('accounts/', include(auth_urls)),
     path('accounts/', include('accounts.urls')),
     path('admin/', admin.site.urls),
-    path('polls/', include('polls.urls'), name='polls')
+    path('polls/', include('polls.urls'), name='polls'),
+    path('auctions/', include('auctions.urls'), name='auctions'),
 ]

@@ -17,7 +17,7 @@ class IndexView(LoginRequiredMixin, generic.ListView):
     template_name = 'auctions/index.html'
 
     def get_queryset(self):
-        return models.Auction.objects.all()
+        return models.Auction.objects.order_by('-time_starting')
 
 
 class DetailView(LoginRequiredMixin, generic.DetailView):

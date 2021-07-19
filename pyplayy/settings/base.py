@@ -104,7 +104,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LOGIN_REDIRECT_URL = '/polls/'
+LOGIN_REDIRECT_URL = '/auctions/'
 LOGOUT_REDIRECT_URL = '/accounts/login'
 
 # Internationalization

@@ -32,6 +32,7 @@ python-dotenv = "*"
 libsass = "*"
 django-sass-processor = "*"
 django-crispy-forms = "*"
+django-bootstrap-datepicker-plus = "*"
 
 [dev-packages]
 

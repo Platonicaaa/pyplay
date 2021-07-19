@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{% url 'auctions:index' %}">Auctions</a></li>
+    <li class="breadcrumb-item active"><a href="{% url 'auctions:edit' pk=auction.pk %}">Edit</a></li>
+{% endblock %}
+
+{% block content %}
+
+    <legend><h1>Edit {{ auction.product_id }}</h1></legend>
+    <br>
+
+    {% crispy form %}
+{% endblock %}

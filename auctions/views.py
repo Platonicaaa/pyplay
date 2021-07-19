@@ -1,4 +1,3 @@
-import pdb
 from datetime import timedelta
 
 from django.contrib.auth.decorators import login_required
@@ -11,6 +10,7 @@ from django.views import generic
 
 from accounts.models import PyPlayyUser
 from auctions import models
+from auctions.forms import AuctionForm
 
 
 class IndexView(LoginRequiredMixin, generic.ListView):
@@ -27,9 +27,16 @@ class DetailView(LoginRequiredMixin, generic.DetailView):
 
 class CreateView(LoginRequiredMixin, generic.CreateView):
     model = models.Auction
-    fields = ['product_id', 'bids', 'time_starting', 'time_ending']
+    form_class = AuctionForm
+    template_name = 'auctions/create.html'
     success_url = reverse_lazy('auctions:index')
-    template_name = 'auctions/auction_form.html'
+
+
+class EditView(LoginRequiredMixin, generic.UpdateView):
+    model = models.Auction
+    form_class = AuctionForm
+    template_name = 'auctions/edit.html'
+    success_url = reverse_lazy('auctions:index')
 
 
 @login_required

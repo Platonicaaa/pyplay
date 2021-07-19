@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "e322ac3f61408be288e8fd0b13d2bffcaccb76b55ab455d0755ba4393ba66a83"
+            "sha256": "21b13d40fbc4e1306e39239747f23a8ff3e938206a3bc950e9b8d88f79e5fe54"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -121,6 +121,14 @@
             ],
             "index": "pypi",
             "version": "==3.2.4"
+        },
+        "django-bootstrap-datepicker-plus": {
+            "hashes": [
+                "sha256:490058eba99d47f48a7d24fa78581c0e36375bdc7aa9605783eeb170d51fd0df",
+                "sha256:a8bc19cc6846f97ff1e6c447f4e0387881d16e8afa1e8bd7a652c19e545c566b"
+            ],
+            "index": "pypi",
+            "version": "==3.0.5"
         },
         "django-crispy-forms": {
             "hashes": [

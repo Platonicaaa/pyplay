@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load crispy_forms_filters %}
 {% load crispy_forms_tags %}
 
 {% block breadcrumb %}
@@ -9,13 +8,8 @@
 
 {% block content %}
 
-    <legend><h1>{{ auction.product_id }}</h1></legend>
+    <legend><h1>New Auction</h1></legend>
     <br>
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <button type="submit" class="btn btn-primary">Create Auction</button>
-    </form>
-
+    {% crispy form %}
 {% endblock %}

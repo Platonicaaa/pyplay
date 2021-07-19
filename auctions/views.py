@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.utils import timezone
 from django.views import generic
 
@@ -23,6 +23,13 @@ class IndexView(LoginRequiredMixin, generic.ListView):
 class DetailView(LoginRequiredMixin, generic.DetailView):
     model = models.Auction
     template_name = 'auctions/detail.html'
+
+
+class CreateView(LoginRequiredMixin, generic.CreateView):
+    model = models.Auction
+    fields = ['product_id', 'bids', 'time_starting', 'time_ending']
+    success_url = reverse_lazy('auctions:index')
+    template_name = 'auctions/auction_form.html'
 
 
 @login_required

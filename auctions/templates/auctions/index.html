@@ -7,6 +7,9 @@
 {% block content %}
 
     <h1>Latest Auctions</h1>
+    <div class="d-flex justify-content-end">
+        <a class="btn btn-primary bi bi-plus" href="{% url 'auctions:create' %}">New</a>
+    </div>
     <br>
     {% if auction_list %}
         <div class="list-group">

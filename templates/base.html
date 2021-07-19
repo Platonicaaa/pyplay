@@ -1,4 +1,6 @@
-{% load static %}<!DOCTYPE html>
+{% load static %}
+{% load sass_tags %}
+<!DOCTYPE html>
 <html>
 <head>
     <title>{% block title %}PyPlayy{% endblock %}</title>
@@ -18,7 +20,7 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" type="text/css" href="{% static 'global.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% sass_src 'global.scss' %}">
     {% block stylesheet %} <!-- Apps will add their specific styling here -->{% endblock %}
 </head>
 

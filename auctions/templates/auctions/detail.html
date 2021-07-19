@@ -2,7 +2,7 @@
 
 {% block breadcrumb %}
     <li class="breadcrumb-item"><a href="{% url 'auctions:index' %}">Auctions</a></li>
-    <li class="breadcrumb-item active"><a href="{% url 'auctions:detail' pk=auction.pk %}">{{ auction.pk }}</a></li>
+    <li class="breadcrumb-item active"><a href="{% url 'auctions:detail' pk=auction.pk %}">{{ auction.product_id.title }}</a></li>
 {% endblock %}
 
 {% block content %}

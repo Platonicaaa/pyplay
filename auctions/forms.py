@@ -1,6 +1,6 @@
 from bootstrap_datepicker_plus import DateTimePickerInput
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, ButtonHolder
+from crispy_forms.layout import Submit, Layout, ButtonHolder, Field, Row, Fieldset
 from django import forms
 
 from .models import Auction
@@ -17,11 +17,14 @@ class AuctionForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.helper = FormHelper()
+        self.helper = FormHelper(self)
         self.helper.form_id = 'id-auctionForm'
         self.helper.form_method = 'post'
+        self.helper.form_class = 'col-xl-5 col-lg-6 col-md-7'
         self.helper.layout = Layout(
-            'product_id', 'bids',
-            'time_starting', 'time_ending',
+            'product_id',
+            'bids',
+            'time_starting',
+            'time_ending',
             ButtonHolder(Submit('Save', 'Save')),
         )

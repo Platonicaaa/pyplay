@@ -1,14 +1,19 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.utils import timezone
 from django.views import generic
 
+from accounts.models import PyPlayyUser
 from .models import Question, Choice
 
 
-class IndexView(LoginRequiredMixin, generic.ListView):
+class IndexView(UserPassesTestMixin, generic.ListView):
+    def test_func(self):
+        return self.request.user.is_provider()
+
     template_name = 'polls/index.html'
     context_object_name = 'latest_question_list'
 
@@ -16,7 +21,10 @@ class IndexView(LoginRequiredMixin, generic.ListView):
         return Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
 
 
-class DetailView(LoginRequiredMixin, generic.DetailView):
+class DetailView(UserPassesTestMixin, generic.DetailView):
+    def test_func(self):
+        return self.request.user.is_provider()
+
     model = Question
     template_name = 'polls/detail.html'
 
@@ -24,11 +32,15 @@ class DetailView(LoginRequiredMixin, generic.DetailView):
         return Question.objects.filter(pub_date__lte=timezone.now())
 
 
-class ResultsView(LoginRequiredMixin, generic.DetailView):
+class ResultsView(UserPassesTestMixin, generic.DetailView):
+    def test_func(self):
+        return self.request.user.is_provider()
+
     model = Question
     template_name = 'polls/results.html'
 
 
+@user_passes_test(PyPlayyUser.is_buyer)
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:

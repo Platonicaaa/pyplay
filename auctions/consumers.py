@@ -64,7 +64,6 @@ def do_bid(user, auction_id):
             increase_bid(user, auction)
         else:
             current_winner = PyPlayyUser.objects.filter(id=latest_bid[0].user_id.id)
-            increase_bid(user, auction)
             if current_winner[0].id != user.id:
                 increase_bid(user, auction)
             else:

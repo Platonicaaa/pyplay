@@ -7,9 +7,12 @@
 {% endblock %}
 
 {% block content %}
-
     <legend><h1>New Auction</h1></legend>
     <br>
-
-    {% crispy form %}
+    <div class="row align-content-center">
+        <div class="col-xl-5 col-lg-6 col-md-7">
+            {% csrf_token %}
+            {% crispy form %}
+        </div>
+    </div>
 {% endblock %}

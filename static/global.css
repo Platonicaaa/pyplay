@@ -19,6 +19,9 @@ body {
   background-color: azure;
   opacity: 65%; }
 
+.btn {
+  border-radius: 10px; }
+
 /*# sourceMappingURL=global.css.map */
 
 /*# sourceMappingURL=global.css.map */

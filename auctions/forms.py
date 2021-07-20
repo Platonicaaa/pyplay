@@ -20,7 +20,6 @@ class AuctionForm(forms.ModelForm):
         self.helper = FormHelper(self)
         self.helper.form_id = 'id-auctionForm'
         self.helper.form_method = 'post'
-        self.helper.form_class = 'col-xl-5 col-lg-6 col-md-7'
         self.helper.layout = Layout(
             'product_id',
             'bids',

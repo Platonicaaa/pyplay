@@ -31,9 +31,10 @@
 
     <script>
         const auctionId = JSON.parse(document.getElementById('auction-id').value);
+        const protocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
 
         const auctionSocket = new WebSocket(
-            'ws://'
+            protocol
             + window.location.host
             + '/ws/auction/'
             + auctionId

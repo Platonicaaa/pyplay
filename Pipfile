@@ -33,6 +33,9 @@ libsass = "*"
 django-sass-processor = "*"
 django-crispy-forms = "*"
 django-bootstrap-datepicker-plus = "*"
+daphne = "*"
+channels = "*"
+channels-redis = "*"
 
 [dev-packages]
 

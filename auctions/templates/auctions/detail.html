@@ -2,7 +2,8 @@
 
 {% block breadcrumb %}
     <li class="breadcrumb-item"><a href="{% url 'auctions:index' %}">Auctions</a></li>
-    <li class="breadcrumb-item active"><a href="{% url 'auctions:detail' pk=auction.pk %}">{{ auction.product_id.title }}</a></li>
+    <li class="breadcrumb-item active"><a
+            href="{% url 'auctions:detail' pk=auction.pk %}">{{ auction.product_id.title }}</a></li>
 {% endblock %}
 
 {% block content %}
@@ -16,19 +17,45 @@
     <p>Starts at: <strong> {{ auction.time_starting }}</strong></p>
     <p>Ends at: <strong> {{ auction.time_ending }}</strong></p>
     <br>
-    {% if error_message %}
-        <p><strong>{{ error_message }}</strong></p>
-    {% endif %}
+    <p><strong id="error_message">
+        {% if error_message %}
+            {{ error_message }}
+        {% endif %}
+    </strong></p>
     <br>
 
-    <form action="{% url 'auctions:bid' auction.id %}" method="post">
-        <div class="form-group">
-            {% csrf_token %}
+    <input id="auction-id" type="number" hidden value="{{ auction.id }}">
+    <label for="auction-bids">Number of bids:</label>
+    <input id="auction-bids" type="number" disabled value="{{ auction.bids }}">
+    <input id="auction-bid-submit" class="btn btn-primary" type="submit" value="Bid">
 
-            <label for="{{ auction.id }}-bids">Number of bids:</label>
-            <input id="{{ auction.id }}-bids" type="number" disabled value="{{ auction.bids }}">
-        </div>
-        <input class="btn btn-primary" type="submit" value="Bid">
-    </form>
+    <script>
+        const auctionId = JSON.parse(document.getElementById('auction-id').value);
+
+        const auctionSocket = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/auction/'
+            + auctionId
+            + '/'
+        );
+
+        auctionSocket.onmessage = function (e) {
+            const data = JSON.parse(e.data);
+            if (data['error_message']) {
+                document.querySelector('#error_message').textContent = data['error_message'];
+            } else if (data['bids']) {
+                document.querySelector('#auction-bids').value = data['bids'];
+            }
+        };
+
+        auctionSocket.onclose = function (e) {
+            console.error('Chat socket closed unexpectedly');
+        };
+
+        document.querySelector('#auction-bid-submit').onclick = function (e) {
+            auctionSocket.send(JSON.stringify({}));
+        };
+    </script>
 
 {% endblock %}

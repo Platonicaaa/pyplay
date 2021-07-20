@@ -1,1 +1,1 @@
-web: gunicorn pyplayy.wsgi
+web: daphne pyplayy.asgi:application

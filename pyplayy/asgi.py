@@ -9,14 +9,14 @@ https://docs.djangoproject.com/en/3.2/howto/deployment/asgi/
 
 import os
 
-import dotenv
-from channels.auth import AuthMiddlewareStack
-from channels.routing import ProtocolTypeRouter, URLRouter
 from django.core.asgi import get_asgi_application
-
 # Initialize Django ASGI application early to ensure the AppRegistry
 # is populated before importing code that may import ORM models.
 asgi_application = get_asgi_application()
+
+import dotenv
+from channels.auth import AuthMiddlewareStack
+from channels.routing import ProtocolTypeRouter, URLRouter
 
 import auctions.routing
 

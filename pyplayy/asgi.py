@@ -9,10 +9,15 @@ https://docs.djangoproject.com/en/3.2/howto/deployment/asgi/
 
 import os
 
+import django
 import dotenv
 from channels.auth import AuthMiddlewareStack
 from channels.routing import ProtocolTypeRouter, URLRouter
 from django.core.asgi import get_asgi_application
+
+# Initialize Django ASGI application early to ensure the AppRegistry
+# is populated before importing code that may import ORM models.
+asgi_application = get_asgi_application()
 
 import auctions.routing
 
@@ -24,7 +29,7 @@ if os.getenv('DJANGO_SETTINGS_MODULE'):
     os.environ['DJANGO_SETTINGS_MODULE'] = os.getenv('DJANGO_SETTINGS_MODULE')
 
 application = ProtocolTypeRouter({
-    "http": get_asgi_application(),
+    "http": asgi_application,
     "websocket": AuthMiddlewareStack(
         URLRouter(
             auctions.routing.websocket_urlpatterns

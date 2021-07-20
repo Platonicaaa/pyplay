@@ -8,8 +8,8 @@ https://docs.djangoproject.com/en/3.2/howto/deployment/wsgi/
 """
 
 import os
-import dotenv
 
+import dotenv
 from django.core.wsgi import get_wsgi_application
 
 # Load environment specific variables

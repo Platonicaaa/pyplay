@@ -30,12 +30,16 @@
     {% include '_nav.html' %}
 
     <div class="container">
-        <ol class="breadcrumb my-4" style="color: #1b1b1b">
-            {% block breadcrumb %}
-            {% endblock %}
-        </ol>
-        {% block content %}
+        {% block location %}
+            <ol class="breadcrumb my-4" style="color: #1b1b1b">
+                {% block breadcrumb %}
+                {% endblock %}
+            </ol>
         {% endblock %}
+        <div class="my-4">
+            {% block content %}
+            {% endblock %}
+        </div>
     </div>
 {% endblock body %}
 </body>

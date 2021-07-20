@@ -12,7 +12,10 @@
     <br>
 
     <div class="d-flex justify-content-end">
-        <a class="btn btn-primary bi bi-plus" href="{% url 'auctions:edit' pk=auction.pk %}">Edit</a>
+        <a class="btn btn-primary" href="{% url 'auctions:edit' pk=auction.pk %}">
+            <i class="bi bi-pencil"></i>
+            Edit
+        </a>
     </div>
     <p>Starts at: <strong> {{ auction.time_starting }}</strong></p>
     <p>Ends at: <strong> {{ auction.time_ending }}</strong></p>

@@ -8,17 +8,8 @@ https://docs.djangoproject.com/en/3.2/howto/deployment/asgi/
 """
 
 import os
-
-from django.core.asgi import get_asgi_application
-# Initialize Django ASGI application early to ensure the AppRegistry
-# is populated before importing code that may import ORM models.
-asgi_application = get_asgi_application()
-
 import dotenv
-from channels.auth import AuthMiddlewareStack
-from channels.routing import ProtocolTypeRouter, URLRouter
-
-import auctions.routing
+from django.core.asgi import get_asgi_application
 
 dotenv.load_dotenv(
     os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env')
@@ -26,6 +17,13 @@ dotenv.load_dotenv(
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pyplayy.settings.development')
 if os.getenv('DJANGO_SETTINGS_MODULE'):
     os.environ['DJANGO_SETTINGS_MODULE'] = os.getenv('DJANGO_SETTINGS_MODULE')
+# Initialize Django ASGI application early to ensure the AppRegistry
+# is populated before importing code that may import ORM models.
+asgi_application = get_asgi_application()
+
+from channels.auth import AuthMiddlewareStack
+from channels.routing import ProtocolTypeRouter, URLRouter
+import auctions.routing
 
 application = ProtocolTypeRouter({
     "http": asgi_application,

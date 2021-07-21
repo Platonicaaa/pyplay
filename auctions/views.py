@@ -1,22 +1,15 @@
-import pdb
-from datetime import timedelta
-
-from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.mixins import UserPassesTestMixin
-from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
-from django.urls import reverse, reverse_lazy
-from django.utils import timezone
+from django.urls import reverse_lazy
 from django.views import generic
 
-from accounts.models import PyPlayyUser
+from accounts.utils import is_buyer
 from auctions import models
 from auctions.forms import AuctionForm
 
 
 class IndexView(UserPassesTestMixin, generic.ListView):
     def test_func(self):
-        return self.request.user.is_buyer()
+        return is_buyer(self.request.user)
 
     template_name = 'auctions/index.html'
 
@@ -26,7 +19,7 @@ class IndexView(UserPassesTestMixin, generic.ListView):
 
 class DetailView(UserPassesTestMixin, generic.DetailView):
     def test_func(self):
-        return self.request.user.is_buyer()
+        return is_buyer(self.request.user)
 
     model = models.Auction
     template_name = 'auctions/detail.html'
@@ -34,7 +27,7 @@ class DetailView(UserPassesTestMixin, generic.DetailView):
 
 class CreateView(UserPassesTestMixin, generic.CreateView):
     def test_func(self):
-        return self.request.user.is_buyer()
+        return is_buyer(self.request.user)
 
     model = models.Auction
     form_class = AuctionForm
@@ -44,10 +37,9 @@ class CreateView(UserPassesTestMixin, generic.CreateView):
 
 class EditView(UserPassesTestMixin, generic.UpdateView):
     def test_func(self):
-        return self.request.user.is_buyer()
+        return is_buyer(self.request.user)
 
     model = models.Auction
     form_class = AuctionForm
     template_name = 'auctions/edit.html'
     success_url = reverse_lazy('auctions:index')
-

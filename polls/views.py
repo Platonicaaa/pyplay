@@ -6,13 +6,13 @@ from django.urls import reverse
 from django.utils import timezone
 from django.views import generic
 
-from accounts.models import PyPlayyUser
+from accounts.utils import is_provider
 from .models import Question, Choice
 
 
 class IndexView(UserPassesTestMixin, generic.ListView):
     def test_func(self):
-        return self.request.user.is_provider()
+        return is_provider(self.request.user)
 
     template_name = 'polls/index.html'
     context_object_name = 'latest_question_list'
@@ -23,7 +23,7 @@ class IndexView(UserPassesTestMixin, generic.ListView):
 
 class DetailView(UserPassesTestMixin, generic.DetailView):
     def test_func(self):
-        return self.request.user.is_provider()
+        return is_provider(self.request.user)
 
     model = Question
     template_name = 'polls/detail.html'
@@ -34,13 +34,13 @@ class DetailView(UserPassesTestMixin, generic.DetailView):
 
 class ResultsView(UserPassesTestMixin, generic.DetailView):
     def test_func(self):
-        return self.request.user.is_provider()
+        return is_provider(self.request.user)
 
     model = Question
     template_name = 'polls/results.html'
 
 
-@user_passes_test(PyPlayyUser.is_buyer)
+@user_passes_test(is_provider)
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:

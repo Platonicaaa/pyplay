@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{% url 'products:index' %}">Products</a></li>
+{% endblock %}
+
+{% block content %}
+
+    <h1>Latest Products</h1>
+    <div class="d-flex justify-content-end">
+        <a class="btn btn-primary" href="{% url 'products:create' %}">
+            <i class="bi bi-plus"></i>
+            New
+        </a>
+    </div>
+    <br>
+    {% if product_list %}
+        <div class="list-group">
+            {% for product in product_list %}
+                <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                   href="{% url 'products:detail' product.id %}">
+                    {{ product.description }}
+                    <span class="badge badge-pill
+                            {% if product.is_active %}
+                                badge-success
+                            {% else %}
+                                badge-danger
+                            {% endif %}"
+                    >
+                    {{ product }}
+                    </span>
+                </a>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No products are available.</p>
+    {% endif %}
+
+{% endblock %}

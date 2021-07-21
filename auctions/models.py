@@ -8,7 +8,7 @@ from django.utils import timezone
 
 from accounts.models import PyPlayyUser
 
-
+# noinspection DuplicatedCode
 class Product(models.Model):
     PRODUCT_GROUPS = (
         ('FRU', 'Fruits'),

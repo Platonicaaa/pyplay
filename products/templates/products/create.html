@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{% url 'products:index' %}">Products</a></li>
+    <li class="breadcrumb-item active"><a href="{% url 'products:create' %}">Create</a></li>
+{% endblock %}
+
+{% block content %}
+    <legend><h1>New Product</h1></legend>
+    <br>
+    <div class="row align-content-center">
+        <div class="col-xl-5 col-lg-6 col-md-7">
+            {% csrf_token %}
+            {% crispy form %}
+        </div>
+    </div>
+{% endblock %}

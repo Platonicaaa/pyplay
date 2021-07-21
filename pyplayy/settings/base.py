@@ -14,6 +14,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 import django_heroku
+from django.conf.global_settings import STATICFILES_STORAGE
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -153,6 +154,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+# Heroku with Whitenoise fails to collect static assets properly.
+# By deleting this setting, we will hand over the responsibility to Django
+del STATICFILES_STORAGE
 
 # Nice forms with bootstrap
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

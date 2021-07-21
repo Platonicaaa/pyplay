@@ -7,7 +7,7 @@ def create_groups(apps, _):
     # We can't import the Person model directly as it may be a newer
     # version than this migration expects. We use the historical version.
     Group = apps.get_model('auth', 'Group')
-    providers_group, _ = Group.objects.get_or_create(name='Provider')
+    sellers_group, _ = Group.objects.get_or_create(name='Seller')
     buyers_group, _ = Group.objects.get_or_create(name='Buyer')
 
     PyPlayyUser = apps.get_model('accounts', 'PyPlayyUser')
@@ -16,13 +16,16 @@ def create_groups(apps, _):
 
 
 def remove_groups(apps, _):
+    Group = apps.get_model('auth', 'Group')
+    sellers_group = Group.objects.get(name='Seller')
+    buyers_group = Group.objects.get(name='Buyer')
+
     PyPlayyUser = apps.get_model('accounts', 'PyPlayyUser')
     for user in PyPlayyUser.objects.all():
-        user.groups.clear()
+        user.groups.remove(sellers_group, buyers_group)
 
-    Group = apps.get_model('auth', 'Group')
-    providers_group, _ = Group.objects.filter(name='Provider').delete()
-    buyers_group, _ = Group.objects.filter(name='Buyer').delete()
+    sellers_group.delete()
+    buyers_group.delete()
 
 
 class Migration(migrations.Migration):

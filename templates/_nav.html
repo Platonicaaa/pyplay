@@ -14,8 +14,8 @@
                     {% if user|is_buyer %}
                         {% include '_nav_buyer.html' %}
                     {% endif %}
-                    {% if user|is_provider %}
-                        {% include '_nav_provider.html' %}
+                    {% if user|is_seller %}
+                        {% include '_nav_seller.html' %}
                     {% endif %}
                 </ul>
                 <ul class="navbar-nav ml-auto">

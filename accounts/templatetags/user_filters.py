@@ -11,8 +11,8 @@ def is_buyer(user):
 
 
 @register.filter
-def is_provider(user):
-    return utils.is_provider(user)
+def is_seller(user):
+    return utils.is_seller(user)
 
 
 @register.filter

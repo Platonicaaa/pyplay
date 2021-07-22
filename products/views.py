@@ -2,14 +2,14 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from django.urls import reverse_lazy
 from django.views import generic
 
-from accounts.utils import is_buyer
+from accounts.utils import is_seller
 from products import models
 from .forms import ProductForm
 
 
 class IndexView(UserPassesTestMixin, generic.ListView):
     def test_func(self):
-        return is_buyer(self.request.user)
+        return is_seller(self.request.user)
 
     template_name = 'products/index.html'
 
@@ -24,7 +24,7 @@ class IndexView(UserPassesTestMixin, generic.ListView):
 
 class DetailView(UserPassesTestMixin, generic.DetailView):
     def test_func(self):
-        return is_buyer(self.request.user)
+        return is_seller(self.request.user)
 
     model = models.Product
     template_name = 'products/detail.html'
@@ -32,7 +32,7 @@ class DetailView(UserPassesTestMixin, generic.DetailView):
 
 class CreateView(UserPassesTestMixin, generic.CreateView):
     def test_func(self):
-        return is_buyer(self.request.user)
+        return is_seller(self.request.user)
 
     model = models.Product
     form_class = ProductForm
@@ -42,7 +42,7 @@ class CreateView(UserPassesTestMixin, generic.CreateView):
 
 class EditView(UserPassesTestMixin, generic.UpdateView):
     def test_func(self):
-        return is_buyer(self.request.user)
+        return is_seller(self.request.user)
 
     model = models.Product
     form_class = ProductForm

@@ -25,4 +25,4 @@ class Product(models.Model):
         return now - datetime.timedelta(days=1) <= self.pub_date <= now
 
     def __str__(self):
-        return self.description
+        return '{0} - {1}'.format(self.description, self.category)

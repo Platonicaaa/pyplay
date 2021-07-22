@@ -2,11 +2,12 @@ import datetime
 
 from django.contrib import admin
 from django.db import models
-
 # Create your models here.
 from django.utils import timezone
 
+import products.models
 from accounts.models import PyPlayyUser
+
 
 # noinspection DuplicatedCode
 class Product(models.Model):
@@ -33,7 +34,7 @@ class Product(models.Model):
 
 
 class Auction(models.Model):
-    product_id = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product_id = models.ForeignKey(products.models.Product, on_delete=models.CASCADE)
     bids = models.IntegerField(default=0)
     time_starting = models.DateTimeField()
     time_ending = models.DateTimeField()

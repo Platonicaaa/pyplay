@@ -14,7 +14,12 @@ class IndexView(UserPassesTestMixin, generic.ListView):
     template_name = 'products/index.html'
 
     def get_queryset(self):
-        return models.Product.objects.order_by('-pub_date')
+        queryset = models.Product.objects.order_by('-pub_date')
+
+        if 'category' in self.request.GET:
+            queryset = queryset.filter(category=self.request.GET['category'])
+
+        return queryset
 
 
 class DetailView(UserPassesTestMixin, generic.DetailView):

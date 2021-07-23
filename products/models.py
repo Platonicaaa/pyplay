@@ -5,15 +5,17 @@ from django.db import models
 from django.utils import timezone
 
 
-class Product(models.Model):
-    PRODUCT_GROUPS = (
-        ('FRU', 'Fruits'),
-        ('VEG', 'Vegetables'),
-    )
+class ProductGroup(models.Model):
+    name = models.CharField(max_length=200)
 
+    def __str__(self):
+        return self.name
+
+
+class Product(models.Model):
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=500)
-    category = models.CharField(max_length=3, choices=PRODUCT_GROUPS)
+    product_group_id = models.ForeignKey(ProductGroup, on_delete=models.CASCADE)
     pub_date = models.DateTimeField('date_published')
 
     @admin.display(
@@ -25,4 +27,4 @@ class Product(models.Model):
         return now - datetime.timedelta(days=1) <= self.pub_date <= now
 
     def __str__(self):
-        return '{0} - {1}'.format(self.description, self.category)
+        return '{0} - {1}'.format(self.description, self.product_group_id)

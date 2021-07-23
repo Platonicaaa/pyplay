@@ -1,10 +1,12 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic
 
 from accounts.utils import is_seller
 from products import models
 from .forms import ProductForm
+from .models import ProductGroup
 
 
 class IndexView(UserPassesTestMixin, generic.ListView):
@@ -16,8 +18,8 @@ class IndexView(UserPassesTestMixin, generic.ListView):
     def get_queryset(self):
         queryset = models.Product.objects.order_by('-pub_date')
 
-        if 'category' in self.request.GET:
-            queryset = queryset.filter(category=self.request.GET['category'])
+        if 'product_group' in self.request.GET:
+            queryset = queryset.filter(product_group_id__name=self.request.GET['product_group'])
 
         return queryset
 

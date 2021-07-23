@@ -21,12 +21,12 @@
 
         <li class="nav-item">
             <a class="nav-link {% if True %} active {% endif %}" {% if True %} aria-current="page" {% endif %}
-               href="{% url 'products:index'%}?category={{ 'FRU' | urlencode }}">Fruits</a>
+               href="{% url 'products:index'%}?product_group={{ 'Fruits' | urlencode }}">Fruits</a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link {% if True %} active {% endif %}" {% if True %} aria-current="page" {% endif %}
-               href="{% url 'products:index'%}?category={{ 'VEG' | urlencode }}">Vegetables</a>
+               href="{% url 'products:index'%}?product_group={{ 'Vegetables' | urlencode }}">Vegetables</a>
         </li>
     </ul>
 

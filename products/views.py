@@ -1,12 +1,10 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
-from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic
 
 from accounts.utils import is_seller
 from products import models
 from .forms import ProductForm
-from .models import ProductGroup
 
 
 class IndexView(UserPassesTestMixin, generic.ListView):
@@ -16,12 +14,20 @@ class IndexView(UserPassesTestMixin, generic.ListView):
     template_name = 'products/index.html'
 
     def get_queryset(self):
-        queryset = models.Product.objects.order_by('-pub_date')
+        queryset = models.Product.objects.prefetch_related('product_group_id').order_by('-pub_date')
 
         if 'product_group' in self.request.GET:
             queryset = queryset.filter(product_group_id__name=self.request.GET['product_group'])
 
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+
+        product_groups = models.Product.objects.values_list('product_group_id__name', flat=True).distinct()
+        # Add in a QuerySet of all the books
+        context['product_groups'] = product_groups
+        return context
 
 
 class DetailView(UserPassesTestMixin, generic.DetailView):

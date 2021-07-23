@@ -14,20 +14,22 @@
     </div>
 
     <ul class="nav nav-tabs mb-3">
-        <li class="nav-item">
-            <a class="nav-link {% if True %} active {% endif %}" {% if True %} aria-current="page" {% endif %}
-               href="{% url 'products:index'%}">All</a>
-        </li>
+        {% with request.GET.product_group as selected %}
+            <li class="nav-item">
+                <a class="nav-link {% if not selected %} active {% endif %}"
+                        {% if not selected %} aria-current="page" {% endif %}
+                   href="{% url 'products:index' %}">All</a>
+            </li>
 
-        <li class="nav-item">
-            <a class="nav-link {% if True %} active {% endif %}" {% if True %} aria-current="page" {% endif %}
-               href="{% url 'products:index'%}?product_group={{ 'Fruits' | urlencode }}">Fruits</a>
-        </li>
+            {% for product_group in product_groups %}
+                <li class="nav-item">
+                    <a class="nav-link {% if selected == product_group %} active {% endif %}"
+                            {% if selected == product_group %} aria-current="page" {% endif %}
+                       href="{% url 'products:index' %}?product_group={{ product_group | urlencode }}">{{ product_group }}</a>
+                </li>
+            {% endfor %}
+        {% endwith %}
 
-        <li class="nav-item">
-            <a class="nav-link {% if True %} active {% endif %}" {% if True %} aria-current="page" {% endif %}
-               href="{% url 'products:index'%}?product_group={{ 'Vegetables' | urlencode }}">Vegetables</a>
-        </li>
     </ul>
 
     <br>

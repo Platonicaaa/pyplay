@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{% url 'product_groups:index' %}">Product Groups</a></li>
+    <li class="breadcrumb-item active">
+        <a href="{% url 'product_groups:detail' pk=productgroup.pk %}">{{ productgroup.name }}</a></li>
+{% endblock %}
+
+{% block content %}
+
+    <legend><h1>{{ productgroup.name }}</h1></legend>
+    <br>
+
+    <div class="d-flex justify-content-end">
+        <a class="btn btn-primary" href="{% url 'product_groups:edit' pk=productgroup.pk %}">
+            <i class="bi bi-pencil"></i>
+            Edit
+        </a>
+    </div>
+    <br>
+    <p><strong id="error_message">
+        {% if error_message %}
+            {{ error_message }}
+        {% endif %}
+    </strong></p>
+    <br>
+{% endblock %}

@@ -4,7 +4,10 @@ from django.contrib import admin
 from django.db import models
 from django.utils import timezone
 
+import product_groups.models
 
+
+# To be deleted
 class ProductGroup(models.Model):
     name = models.CharField(max_length=200)
 
@@ -15,7 +18,7 @@ class ProductGroup(models.Model):
 class Product(models.Model):
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=500)
-    product_group_id = models.ForeignKey(ProductGroup, on_delete=models.CASCADE)
+    product_group_id = models.ForeignKey(product_groups.models.ProductGroup, on_delete=models.CASCADE)
     pub_date = models.DateTimeField('date_published')
 
     @admin.display(

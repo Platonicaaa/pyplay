@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{% url 'product_groups:index' %}">Product Groups</a></li>
+{% endblock %}
+
+{% block content %}
+    <h1>Product Groups</h1>
+    <div class="d-flex justify-content-end">
+        <a class="btn btn-primary" href="{% url 'product_groups:create' %}">
+            <i class="bi bi-plus"></i>
+            New
+        </a>
+    </div>
+
+    <br>
+    {% if productgroup_list %}
+        <div class="list-group">
+            {% for product_group in productgroup_list %}
+                <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                   href="{% url 'product_groups:detail' product_group.id %}">
+                    {{ product_group }}
+                </a>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No product groups are available.</p>
+    {% endif %}
+
+{% endblock %}

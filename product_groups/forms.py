@@ -1,22 +1,18 @@
-from bootstrap_datepicker_plus import DateTimePickerInput
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from django import forms
 
-from .models import Product
+from product_groups.models import ProductGroup
 
 
-class ProductForm(forms.ModelForm):
+class ProductGroupForm(forms.ModelForm):
     class Meta:
-        model = Product
+        model = ProductGroup
         fields = '__all__'
-        widgets = {
-            'pub_date': DateTimePickerInput(),
-        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper(self)
-        self.helper.form_id = 'id-productForm'
+        self.helper.form_id = 'id-productGroupForm'
         self.helper.form_method = 'post'
         self.helper.add_input(Submit('save', 'Save'))

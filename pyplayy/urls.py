@@ -26,4 +26,5 @@ urlpatterns = [
     path('polls/', include('polls.urls'), name='polls'),
     path('auctions/', include('auctions.urls'), name='auctions'),
     path('products/', include('products.urls'), name='products'),
+    path('product_groups/', include('product_groups.urls'), name='product_groups'),
 ]

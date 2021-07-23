@@ -26,6 +26,8 @@
     <br>
 
     <div><strong>Name: </strong> {{ product.title }}</div>
-    <div><strong>Product group: </strong> {{ product.product_group_id }}</div>
+    <div><strong>Product group: </strong>
+        <a href="{% url 'product_groups:detail' pk=product.product_group_id.pk %}">{{ product.product_group_id }}</a>
+    </div>
     <div><strong>Date published: </strong> {{ product.pub_date }}</div>
 {% endblock %}
